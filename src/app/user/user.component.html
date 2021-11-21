@@ -1,5 +1,10 @@
-<form [formGroup]="userFormGroup" (ngSubmit)="submitUsername()">
-  <input type="text" name="username" placeholder="Please Enter Your Name" formControlName="username">
-  <br><br>
-  <button style="margin-left:50px">Play Now</button>
-</form>
+<div *ngIf="!isSubmitted">
+  <form [formGroup]="userFormGroup" (ngSubmit)="submitUsername()">
+    <input type="text" name="username" placeholder="Please Enter Your Name" formControlName="username">
+    <br><br>
+    <button style="margin-left:50px">Play Now</button>
+  </form>
+</div>
+<div *ngIf="isSubmitted">
+   <mat-button-toggle (change)="Reset()" ></mat-button-toggle>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -7,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  isSubmitted: boolean;
 
   getUsername(){
     return this.userFormGroup.get('username')?.value;
@@ -16,15 +18,32 @@ export class UserComponent implements OnInit {
     username:[null, {validators: [Validators.required]}]
 });
 
-  constructor(private formBuilder:FormBuilder) { }
+  constructor(private formBuilder:FormBuilder,
+              private router:Router) {
+    this.isSubmitted = false;
+    localStorage.clear();
+    // let user = localStorage.getItem('usernameSubmitted');
+    // this.isSubmitted = user == 'true';
+  }
 
   ngOnInit(): void {
+
   }
 
   submitUsername() {
     if(this.userFormGroup.valid) {
       localStorage.setItem('username', this.getUsername());
       console.log(this.getUsername())
+      this.router.navigate(['/bus-routes'])
+        .then(() => {
+          this.isSubmitted = true;
+          localStorage.setItem('usernameSubmitted', 'true');
+        })
+      }
     }
+
+  Reset() {
+    localStorage.setItem('usernameSubmitted', 'false');
+    this.isSubmitted = false;
   }
 }
