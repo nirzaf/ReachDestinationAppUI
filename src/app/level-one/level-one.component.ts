@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { LogRegisterService } from '../services/log-register.service';
-import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export interface BusRoutes {
@@ -26,12 +25,15 @@ export class LevelOneComponent implements OnInit {
   routeNumber:any;
   targetDestination:any;
   count = 0;
+  isSubmitted:any;
+
   constructor(private data:DataService,
               private formBuilder: FormBuilder,
               private logger:LogRegisterService) {
     this.loadRoute();
     this.getRandomDestination();
     this.username = localStorage.getItem('username');
+    this.isSubmitted = localStorage.getItem('isSubmitted');
   }
 
   ngOnInit(): void {}

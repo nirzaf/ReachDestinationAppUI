@@ -43,7 +43,9 @@ export class UserComponent implements OnInit {
     }
 
   Reset() {
+    localStorage.clear();
     localStorage.setItem('usernameSubmitted', 'false');
     this.isSubmitted = false;
+    this.router.navigate(['home'])
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="createQuizForm">
+<form [formGroup]="createQuizForm" *ngIf="isSubmitted">
   <mat-card>
     <mat-card-title> Welcome {{ username }}</mat-card-title>
     <mat-card-subtitle>Your target destination is {{ targetDestination }}</mat-card-subtitle>
@@ -11,9 +11,7 @@
     <mat-radio-group aria-label="Select an option" formControlName="isSelectedTrue">
       <mat-radio-button value="1" >Yes</mat-radio-button>
       <mat-radio-button value="0" >No</mat-radio-button>
-
       <button mat-button (click)="goToNextCity()">Submit</button>
     </mat-radio-group>
-
   </mat-card>
 </form>
