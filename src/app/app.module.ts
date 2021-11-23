@@ -4,18 +4,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { LevelOneComponent } from './level-one/level-one.component';
 import {HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import {MatRadioModule} from "@angular/material/radio";
+import {MAT_RADIO_DEFAULT_OPTIONS, MatRadioModule} from "@angular/material/radio";
 import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
-    LevelOneComponent
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -25,9 +25,14 @@ import {MatButtonModule} from "@angular/material/button";
     MatCardModule,
     MatButtonToggleModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_RADIO_DEFAULT_OPTIONS,
+    useValue: {color: 'accent'}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

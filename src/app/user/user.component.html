@@ -1,10 +1,122 @@
-<div *ngIf="!isSubmitted">
-  <form [formGroup]="userFormGroup" (ngSubmit)="submitUsername()">
-    <input type="text" name="username" placeholder="Please Enter Your Name" formControlName="username">
-    <br><br>
-    <button style="margin-left:50px">Play Now</button>
+<mat-card style="background-color: #125699;text-align: center;">
+  <div *ngIf="!isSubmitted">
+    <form [formGroup]="userFormGroup" (ngSubmit)="submitUsername()">
+      <input type="text" name="username" placeholder="Please Enter Your Name" formControlName="username"><br>
+      <mat-error *ngIf="userFormGroup.get('username')?.errors?.required">Name is Required</mat-error>
+      <mat-error *ngIf="userFormGroup.get('username')?.errors?.minlength">Name Length must be 5characters</mat-error>
+      <mat-error *ngIf="userFormGroup.get('username')?.errors?.maxlength">Maximum Length is 25 characters only
+      </mat-error>
+      <br><br>
+      <button>Play Now</button>
+    </form>
+  </div>
+  <div *ngIf="isSubmitted">
+    <mat-button-toggle (change)="Reset()">Replay</mat-button-toggle>
+  </div>
+</mat-card>
+
+<mat-card *ngIf="isSubmitted">
+  <mat-card-title> Welcome {{ username }}</mat-card-title>
+  <mat-card-subtitle>Your target destination is {{ targetDestination }}</mat-card-subtitle>
+  <mat-card-subtitle>Your current location is {{ routeData.currentCity }}</mat-card-subtitle>
+  <mat-card-content>
+    <mat-card-content>{{routeData.question}}</mat-card-content>
+  </mat-card-content>
+  <form [formGroup]="quizFormGroup" style="text-align: center" (submit)="goToNextCity()">
+    <mat-radio-group *ngIf="!isReached" formControlName="isSelectedTrue" required>
+      <mat-radio-button [value]=1>Yes</mat-radio-button>
+      <mat-radio-button [value]=0>No</mat-radio-button>
+    </mat-radio-group>
+    <mat-error *ngIf="quizFormGroup.get('isSelectedTrue')?.errors?.required">Please select an option</mat-error>
+    <br>
+    <mat-button-toggle *ngIf="!isReached" style="background-color:#125699" (click)="goToNextCity()">Submit
+    </mat-button-toggle>
   </form>
-</div>
-<div *ngIf="isSubmitted">
-   <mat-button-toggle (change)="Reset()" >Replay</mat-button-toggle>
+</mat-card>
+<div class="container" *ngIf="isReached" style="text-align: center;">
+  <h1>Your journey history</h1>
+  <h1 class="level-1 rectangle"
+      [ngStyle]="level1=='Akurana'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">Akurana</h1>
+  <ol class="level-2-wrapper">
+    <li>
+      <h2 class="level-2 rectangle"
+          [ngStyle]="level2=='Kandy'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">Kandy</h2>
+      <ol class="level-3-wrapper">
+        <li>
+          <h3 class="level-3 rectangle"
+              [ngStyle]="level3=='Kegalle'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+            Kegalle</h3>
+          <ol class="level-4-wrapper">
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Colombo'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Colombo</h4>
+            </li>
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Galle'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Galle</h4>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <h3 class="level-3 rectangle"
+              [ngStyle]="level3=='Gampola'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+            Gampola</h3>
+          <ol class="level-4-wrapper">
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Nuwareliya'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Nuwareliya</h4>
+            </li>
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Hatton'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Hatton</h4>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <h2 class="level-2 rectangle"
+          [ngStyle]="level2=='Matale'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">Matale</h2>
+      <ol class="level-3-wrapper">
+        <li>
+          <h3 class="level-3 rectangle"
+              [ngStyle]="level3=='Polonnaruwa'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+            Polonnaruwa</h3>
+          <ol class="level-4-wrapper">
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Jaffna'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Jaffna</h4>
+            </li>
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Trinco'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Trinco</h4>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <h3 class="level-3 rectangle"
+              [ngStyle]="level3=='Kurunegal'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+            Kurunegal</h3>
+          <ol class="level-4-wrapper">
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level4=='Vavuniya'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Vavuniya</h4>
+            </li>
+            <li>
+              <h4 class="level-4 rectangle"
+                  [ngStyle]="level3=='Puttalam'?{'background-color':'lime'} : {'background-color': 'AntiqueWhite'}">
+                Puttalam</h4>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
 </div>
