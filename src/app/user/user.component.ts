@@ -19,8 +19,11 @@ export class UserComponent implements OnInit {
   username:any;
 
   //To track the route data from backend after each steps
-  routeData: any;
-  routeNumber:any;
+  routeData: any = {currentCity: "Akurana",
+                    falseValue: 291,
+                    question: "Would you like to get into the bus No 593?",
+                    routeNumber: 593,
+                    trueValue: 101};
   targetDestination:any;
   isReached:boolean=false;
 
@@ -37,7 +40,6 @@ export class UserComponent implements OnInit {
               private route:Router,
               private data:DataService) {
     this.getRandomDestination();
-    this.loadRoute();
     this.isSubmitted = false;
     localStorage.clear();
   }
@@ -52,12 +54,18 @@ export class UserComponent implements OnInit {
       }
     }
 
+  //reset all values on replay
   Reset() {
     localStorage.clear();
     this.isSubmitted = false;
     this.isReached=false;
     this.levelCounter = 1;
-    this.loadRoute();
+    this.routeData = {currentCity: "Akurana",
+      falseValue: 291,
+      question: "Would you like to get into the bus No 593?",
+      routeNumber: 593,
+      trueValue: 101};
+    this.quizFormGroup.reset();
   }
 
   getUsername(){
@@ -78,6 +86,7 @@ export class UserComponent implements OnInit {
     this.targetDestination = cities[Math.floor(Math.random() * cities.length)];
   }
 
+  //To load the route data
   goToNextCity(){
      if(this.quizFormGroup.valid) {
        if (this.quizFormGroup.controls['isSelectedTrue'].value == 1) this.selected = true;
@@ -87,10 +96,10 @@ export class UserComponent implements OnInit {
          this.levelCounter++;
          this.data.getBusRoute(this.routeData.routeNumber, this.selected).then(async data => {
            if (data.data.question == "") {
-             if (data.currentCity == this.targetDestination) {
-               data.question = "Congratulations! You have successfully reached the destination"
+             if (data.data.currentCity == this.targetDestination) {
+               data.data.question = "Congratulations! You have successfully reached the destination"
              } else {
-               data.question = "Oops! you end up in the wrong destination. Please Try again!"
+               data.data.question = "Oops! you end up in the wrong destination. Please Try again!"
              }
              this.isReached = true;
            }
@@ -103,12 +112,5 @@ export class UserComponent implements OnInit {
      }else{
        this.quizFormGroup.markAllAsTouched();
      }
-  }
-
-  //Loading Initial Route Data
-  loadRoute() {
-    this.data.getRoute('593').then(data => {
-      this.routeData = data.data;
-    })
   }
 }
