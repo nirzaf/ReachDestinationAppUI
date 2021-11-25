@@ -12,10 +12,8 @@ export class DataService {
   getBusRoute(routeNo:any, selected: boolean): Promise<any> {
     let postData = { busRouteNo: routeNo, selectedValue: selected };
     return new Promise((resolve, reject) => {
-      console.log(postData);
       this.http.post(environment.baseUrl, postData)
         .subscribe(data=>{
-          console.log(data);
           if(data != null)
             resolve(data);
           else
