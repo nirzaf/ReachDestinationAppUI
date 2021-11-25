@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {DataService} from "../services/data.service";
 
@@ -37,7 +37,6 @@ export class UserComponent implements OnInit {
   level4: any;
 
   levelCounter: number = 1;
-
 
   constructor(private formBuilder: FormBuilder,
               private route: Router,
@@ -88,7 +87,7 @@ export class UserComponent implements OnInit {
     isSelectedTrue: [null, {validators: [Validators.required], updateOn: 'change'}]
   });
 
-//To generate the random destination
+ //To generate the random destination
   getRandomDestination() {
     const cities = ["Colombo", "Galle", "Nuwareliya", "Hatton", "Jaffna", "Trinco", "Puttalam", "Vavuniya"];
     this.targetDestination = cities[Math.floor(Math.random() * cities.length)];
@@ -100,8 +99,6 @@ export class UserComponent implements OnInit {
       this.disableSubmitButton = true;
         if (this.quizFormGroup.controls['isSelectedTrue'].value == 1) this.selected = true;
         if (this.quizFormGroup.controls['isSelectedTrue'].value == 0) this.selected = false;
-        console.log(this.selected);
-
         if (this.selected == true || this.selected == false) {
           this.levelCounter++;
           this.data.getBusRoute(this.routeData.routeNumber, this.selected).then(async data => {
