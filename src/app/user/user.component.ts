@@ -126,6 +126,3 @@ export class UserComponent implements OnInit {
   }
 }
 
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
