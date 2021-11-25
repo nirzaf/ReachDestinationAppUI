@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //local host ASP.NET Core url
-   baseUrl:"https://localhost:9001/api/v1/route/",
+  baseUrl:"https://localhost:9001/api/v1/route/",
 
   //localhost Function App url
   //baseUrl:"http://localhost:7071/api/ReachDestinationAPI",

@@ -11,7 +11,7 @@
     </form>
   </div>
   <div *ngIf="isSubmitted">
-    <mat-button-toggle (change)="Reset()">Replay</mat-button-toggle>
+    <mat-button-toggle (change)="Reset()" >Replay</mat-button-toggle>
   </div>
 </mat-card>
 
@@ -22,14 +22,14 @@
   <mat-card-content>
     <mat-card-content>{{routeData.question}}</mat-card-content>
   </mat-card-content>
-  <form [formGroup]="quizFormGroup" (submit)="goToNextCity()">
+  <form [formGroup]="quizFormGroup" >
     <mat-radio-group *ngIf="!isReached" formControlName="isSelectedTrue" required>
       <mat-radio-button [value]=1>Yes</mat-radio-button>
       <mat-radio-button [value]=0>No</mat-radio-button>
     </mat-radio-group>
     <mat-error *ngIf="quizFormGroup.get('isSelectedTrue')?.errors?.required">Please select an option</mat-error>
     <br>
-    <mat-button-toggle *ngIf="!isReached" style="background-color:#125699" (click)="goToNextCity()">Submit
+    <mat-button-toggle *ngIf="!isReached" style="background-color:#125699" [disabled]="disableSubmitButton" (click)="goToNextCity()">Submit
     </mat-button-toggle>
   </form>
 </mat-card>
