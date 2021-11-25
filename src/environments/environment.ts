@@ -4,10 +4,14 @@
 
 export const environment = {
   production: false,
- //baseUrl:"https://localhost:7040/api/",
-  //baseUrl:"https://localhost:9001/api/v1/route/",
-  baseUrl:"http://localhost:7071/api/ReachDestinationAPI",
-  //baseUrl:"https://reachdestination20211122193249.azurewebsites.net/api/",
+  //local host ASP.NET Core url
+   baseUrl:"https://localhost:9001/api/v1/route/",
+
+  //localhost Function App url
+  //baseUrl:"http://localhost:7071/api/ReachDestinationAPI",
+
+  //Function App Backend  URL
+  //baseUrl:"https://reachdestinationtestingapi.azurewebsites.net/api/ReachDestinationAPI",
 };
 
 /*
