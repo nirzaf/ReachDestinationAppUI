@@ -70,19 +70,6 @@ export class UserComponent implements OnInit {
   //reset all values on replay
   Reset() {
     this.ngOnInit();
-    // this.getRandomDestination();
-    // localStorage.clear();
-    // this.isSubmitted = false;
-    // this.isReached = false;
-    // this.levelCounter = 1;
-    // this.routeData = {
-    //   currentCity: "Akurana",
-    //   falseValue: 291,
-    //   question: "Would you like to get into the bus No 593?",
-    //   routeNumber: 593,
-    //   trueValue: 101
-    // };
-    // this.quizFormGroup.reset();
   }
 
   getUsername() {
