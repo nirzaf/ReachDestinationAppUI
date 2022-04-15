@@ -72,6 +72,7 @@ export class UserComponent implements OnInit {
     this.ngOnInit();
   }
 
+
   getUsername() {
     return this.userFormGroup.get('username')?.value;
   }
